@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Split View</title>
+</head>
+
+<body>
+    <div class="flex min-h-screen">
+        <div id="left-column" class="bg-gray-100 border-r border-r-gray-200 w-1/2">Column 1</div>
+        <div id="resizer" class="w-1 bg-gray-100 cursor-col-resize"></div>
+        <div id="right-column" class="flex-1">
+            <h1>Column 2</h1>
+            <p>Recurrent sequence models are limited by sequential computation, which prevents parallelization and makes
+                it difficult to learn dependencies between distant positions
+                1
+                . To address this, the Transformer is proposed as the first transduction model relying entirely on
+                self-attention to compute representations without using recurrent or convolutional layers
+                2
+                . The methodology uses a stacked encoder-decoder architecture featuring multi-head attention and
+                point-wise feed-forward networks
+                3
+                . Multi-head attention allows the model to jointly attend to information from different representation
+                subspaces at different positions
+                4
+                . In evaluations, the Transformer achieved a state-of-the-art 28.4 BLEU on English-to-German and 41.8
+                BLEU on English-to-French translation tasks
+                5
+                . These results were obtained in significantly less training time than prior models, with the base model
+                requiring only twelve hours on eight GPUs
+                6
+            </p>
+        </div>
+    </div>
+    <script>
+        const resizer = document.getElementById('resizer');
+        const leftColumn = document.getElementById('left-column');
+        let isResizing = false;
+
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+
+            const newWidth = e.clientX;
+            const minWidth = 200;
+            const maxWidth = window.innerWidth - 200;
+
+            if (newWidth >= minWidth && newWidth <= maxWidth) {
+                leftColumn.style.width = newWidth + 'px';
+            }
+
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -8,6 +8,11 @@
   - One column is the sidebar: scrollable, fix account div at the bottom, hideable
   - One column is the main content: heading, chat div, filter selection bar
 
+### Reading (Split View)
+- A 2-column grid
+  - One column shows one type of content
+  - One column shows another type of content (which is responsive - resizeable)
+
 ## Experiments
 
 ## Design Vocab
