@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AI Chat</title>
+</head>
+
+<body>
+    <div class="grid grid-cols-[auto_1fr] min-h-screen">
+        <div>
+            <aside id="sidebar"
+                class="bg-[#f9f9f9] w-72 min-h-screen border-r border-r-gray-200 pt-4 pl-2 pr-2 transition-all duration-200 ease-in-out">
+                <div id="sidebar-header" class="flex justify-between items-center w-full mb-8">
+                    <div id="openai-logo"
+                        class="hover:bg-gray-200 p-2 rounded-lg hover:cursor-pointer transition-opacity duration-200">
+                        <img src="openai.svg" alt="openai" class="w-5">
+                    </div>
+                    <div id="sidebar-toggle" class="hover:bg-gray-200 p-2 rounded-lg hover:cursor-pointer"><img
+                            src="sidebar.svg" alt="sidebar" class="w-4">
+                    </div>
+                </div>
+                <div id="sidebar-content" class="flex flex-col gap-2 overflow-hidden transition-opacity duration-200">
+                    <div
+                        class="text-md font-light hover:bg-gray-200 hover:cursor-pointer p-2 rounded-lg whitespace-nowrap">
+                        How to Use
+                        TailwindCSS</div>
+                    <div
+                        class="text-md font-light hover:bg-gray-200 hover:cursor-pointer p-2 rounded-lg whitespace-nowrap">
+                        Suggest Project
+                        Ideas for C++
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="flex flex-col items-center justify-center min-h-screen">
+            <h1 class="text-4xl">Welcome back, Thu!</h1>
+            <div class="w-[880px] p-8">
+                <input type="text" placeholder="Ask me anything"
+                    class="placeholder:font-light pl-8 p-4 rounded-full border border-gray-300 w-full focus:outline-none shadow-sm">
+            </div>
+        </div>
+    </div>
+    <script>
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarContent = document.getElementById('sidebar-content');
+        const openaiLogo = document.getElementById('openai-logo');
+        const sidebarHeader = document.getElementById('sidebar-header');
+
+        sidebarToggle.addEventListener('click', () => {
+            if (sidebar.classList.contains('w-72')) {
+                // Collapsing: hide content immediately before animation
+                sidebarContent.classList.add('opacity-0', 'hidden');
+                openaiLogo.classList.add('opacity-0', 'hidden');
+
+                // Center the toggle icon
+                sidebarHeader.classList.remove('justify-between');
+                sidebarHeader.classList.add('justify-center');
+
+                // Then animate sidebar width
+                sidebar.classList.remove('w-72');
+                sidebar.classList.add('w-14');
+            } else {
+                // Expanding: animate sidebar width first
+                sidebar.classList.remove('w-14');
+                sidebar.classList.add('w-72');
+
+                // Restore justify-between layout
+                sidebarHeader.classList.remove('justify-center');
+                sidebarHeader.classList.add('justify-between');
+
+                // Then show content after animation completes
+                setTimeout(() => {
+                    sidebarContent.classList.remove('hidden');
+                    openaiLogo.classList.remove('hidden');
+                    // Trigger reflow for fade-in
+                    setTimeout(() => {
+                        sidebarContent.classList.remove('opacity-0');
+                        openaiLogo.classList.remove('opacity-0');
+                    }, 10);
+                }, 50); // Match the transition duration
+            }
+        })
+    </script>
+</body>
+
+</html>
